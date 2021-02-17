@@ -1,4 +1,5 @@
 require('dotenv').config()
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 const { TruffleProvider } = require('@harmony-js/core')
 const account_1_mnemonic = process.env.MNEMONIC
 const account_1_private_key = process.env.PRIVATE_KEY
@@ -11,6 +12,19 @@ gasPrice = process.env.GAS_PRICE
 
 module.exports = {
     networks: {
+        local: {
+            host: 'localhost',
+            port: 7545,
+            network_id: '5777',
+            gas: 4712388
+        },
+        ropsten: {
+            provider: function() {
+                return new HDWalletProvider([account_1_private_key], "https://ropsten.infura.io/v3/58a380d3ecd545b2b5b3dad5d2b18bf0");
+            },
+            network_id: '3',
+            from: '0xFbE0741bC1B52dD723A6bfA145E0a15803AC9581'
+        },
         testnet: {
             network_id: '2',
             provider: () => {

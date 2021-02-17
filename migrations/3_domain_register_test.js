@@ -4,7 +4,7 @@ const OwnedResolver = artifacts.require('@ensdomains/resolver/OwnedResolver');
 const sleep = (sec) => new Promise(resolve => setTimeout(resolve, 1000 * sec))
 
 module.exports = async function(deployer, network, accounts) {
-    console.log('Controller address: ', deployerETHRegistrarController.address);
+    console.log('Controller address: ', ETHRegistrarController.address);
     console.log('Resolver address: ', OwnedResolver.address);
 
     console.log('User account: ', accounts[0]);
@@ -17,7 +17,7 @@ module.exports = async function(deployer, network, accounts) {
     const commitment = await controller.makeCommitmentWithConfig(
         "test",
         accounts[0],
-        "",
+        "0xe6bcec774acd54b71bd49ca5570f4bae074e7d983cad8a3162b480219adecdea",
         OwnedResolver.address,
         accounts[0],
         {from: accounts[0]}
@@ -37,7 +37,7 @@ module.exports = async function(deployer, network, accounts) {
         "test",
         accounts[0],
         299536000,
-        "",
+        "0xe6bcec774acd54b71bd49ca5570f4bae074e7d983cad8a3162b480219adecdea",
         resolver.address,
         accounts[0],
         {from: accounts[0], value: 5e18}
