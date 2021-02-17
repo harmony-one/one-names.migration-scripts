@@ -1,5 +1,5 @@
 {
-  "name": "@ensdomains/resolver",
+  "name": "one-names.migration-scripts",
   "version": "0.3.0",
   "requires": true,
   "main": "index.js",

@@ -1,6 +1,6 @@
-# ENS Migration scripts
+# One Names Migration scripts
 
-This repository contains Truffle migrations that deploy the new ENS registry and related contracts. They are designed to function on both local test networks, as well as all the public networks (testnets and mainnet).
+This repository contains Truffle migrations that deploy the new ONE-ENS registry and related contracts. They are designed to function on both local test networks, as well as all the public networks (testnets and mainnet).
 
 ## Usage
 

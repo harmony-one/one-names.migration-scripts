@@ -1,11 +1,18 @@
-pragma solidity >=0.4.0;
+pragma solidity >=0.4.25;
 
 // We need this to persuade Truffle to compile all the code we want to use.
 
-import "@ensdomains/ens/contracts/ENSRegistryWithFallback.sol";
-import "@ensdomains/ens/contracts/ReverseRegistrar.sol";
-import "@ensdomains/resolver/contracts/PublicResolver.sol";
-import "@ensdomains/ethregistrar/contracts/BaseRegistrarImplementation.sol";
-import "@ensdomains/ens/contracts/TestRegistrar.sol";
-import "@ensdomains/resolver/contracts/OwnedResolver.sol";
-import "@ensdomains/resolver/contracts/DefaultReverseResolver.sol";
+import "@ensdomains/ens/ENSRegistry";
+import "@ensdomains/ens/FIFSRegistrar";
+import "@ensdomains/ens/ReverseRegistrar";
+
+import '@ensdomains/resolver/DefaultReverseResolver';
+import "@ensdomains/resolver/PublicResolver";
+import '@ensdomains/resolver/OwnedResolver';
+
+import '@ensdomains/ethregistrar/StablePriceOracle';
+import '@ensdomains/ethregistrar/DummyOracle';
+import '@ensdomains/ethregistrar/ETHRegistrarController';
+import '@ensdomains/ethregistrar/BaseRegistrarImplementation';
+
+import '@ensdomains/root/Root';

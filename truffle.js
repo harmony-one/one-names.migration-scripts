@@ -11,8 +11,7 @@ module.exports = {
     },
     ropsten: {
       provider: function() {
-        // return new HDWalletProvider(["06363a6a8068946a6bfd8776234af6917458c232bf25ea79e92ac31fd439f2af"], "https://ropsten.infura.io/v3/58a380d3ecd545b2b5b3dad5d2b18bf0");
-        return new HDWalletProvider(["6a36da6f9d0c9ad9fda5ca9b29ab372441196e12cadd813fcb86f6dcd02df332"], "https://ropsten.infura.io/v3/58a380d3ecd545b2b5b3dad5d2b18bf0");
+        return new HDWalletProvider([process.env.ETHERSCAN_API_KEY], "https://ropsten.infura.io/v3/58a380d3ecd545b2b5b3dad5d2b18bf0");
       },
       network_id: '3',
       from: '0xFbE0741bC1B52dD723A6bfA145E0a15803AC9581'
