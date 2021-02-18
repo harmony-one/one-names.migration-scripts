@@ -54,10 +54,10 @@ async function deploy(deployer, network, accounts) {
 
   console.log("End: Set resolver.one address for main Resolver");
 
-  await deployer.deploy(DummyOracle, utils.toBN(1e18));
+  await deployer.deploy(DummyOracle, utils.toBN(1));
   const dummyOracle = await DummyOracle.deployed();
 
-  await deployer.deploy(StablePriceOracle, dummyOracle.address, [0, 0, 4, 2, 1]);
+  await deployer.deploy(StablePriceOracle, dummyOracle.address, [0, 0, 400, 200, 100]);
   const priceOracle = await StablePriceOracle.deployed();
 
   await deployer.deploy(

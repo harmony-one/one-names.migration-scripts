@@ -1,6 +1,8 @@
 const ETHRegistrarController = artifacts.require('@ensdomains/ethregistrar/ETHRegistrarController');
 const OwnedResolver = artifacts.require('@ensdomains/resolver/OwnedResolver');
 
+const namehash = require('eth-ens-namehash');
+
 const sleep = (sec) => new Promise(resolve => setTimeout(resolve, 1000 * sec))
 
 module.exports = async function(deployer, network, accounts) {
@@ -9,13 +11,22 @@ module.exports = async function(deployer, network, accounts) {
 
     console.log('User account: ', accounts[0]);
 
+    const domain = 'test-789';
+    const duration = 60 * 60 * 24 * 365; // 1 year
+
+    console.log('New domain: ', domain);
+
     const controller = await ETHRegistrarController.at(ETHRegistrarController.address);
     const resolver = await OwnedResolver.at(OwnedResolver.address);
+
+    const rentPrice = await controller.rentPrice(domain, duration);
+
+    console.log('rentPrice: ', Number(rentPrice) / 1e18);
 
     console.log('1 - makeCommitmentWithConfig')
 
     const commitment = await controller.makeCommitmentWithConfig(
-        "test",
+        domain,
         accounts[0],
         "0xe6bcec774acd54b71bd49ca5570f4bae074e7d983cad8a3162b480219adecdea",
         OwnedResolver.address,
@@ -27,21 +38,25 @@ module.exports = async function(deployer, network, accounts) {
 
     await controller.commit(commitment, {from: accounts[0]})
 
-    console.log('3 - sleep 65 sec')
+    console.log('3 - sleep 61 sec')
 
-    await sleep(65);
+    await sleep(61);
 
     console.log('4 - registerWithConfig')
 
     await controller.registerWithConfig(
-        "test",
+        domain,
         accounts[0],
-        299536000,
+        duration,
         "0xe6bcec774acd54b71bd49ca5570f4bae074e7d983cad8a3162b480219adecdea",
         resolver.address,
         accounts[0],
-        {from: accounts[0], value: 5e18}
+        {from: accounts[0], value: rentPrice}
     );
 
     console.log('5 - success')
+
+    const address = await resolver.addr(namehash.hash(domain + '.one'));
+
+    console.log('6 - resolved address: ', address, address === accounts[0]);
 }
